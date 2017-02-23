@@ -19,19 +19,7 @@
   height: auto;
   width: 25%;
 }
-.votes{
-  display: flex;
-  flex-direction: column;
-  width: 5%;
-  align-items: center;
-  justify-content: center;
-}
-.votes>p{
-  margin: 0;
-}
-.votes>a>i{
-  font-size: 40px;
-}
+
 .content{
   text-align: left;
   display: flex;
