@@ -24,9 +24,15 @@ class Post extends Component {
 }
 
 class ShowPost extends Component {
+  constructor(){
+    super();
+    this.state = {
+      posts: posts
+    }
+  }
   render(){
     var showPost = [];
-    this.props.posts.forEach(function(post, index){
+    this.state.posts.map(function(post, index){
       showPost.push(<Post post={post} key={index}/>)
     });
     return (
