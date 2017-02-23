@@ -3,11 +3,44 @@ import {Button, ButtonGroup} from 'react-bootstrap';
 import posts from './posts';
 import './App.css';
 
-class App extends Component {
-  constructor(){
-    super();
+class Post extends Component {
+  render(){
+    return(
+      <div className="post">
+        <img src={this.props.post.post_image_url } alt="post" />
+        <div className="votes">
+          <a><i className="material-icons">arrow_drop_up</i></a>
+          <p>{this.props.post.votes}</p>
+          <a href="#"><i className="material-icons">arrow_drop_down</i></a>
+        </div>
+        <div className="content">
+          <a href={this.props.post.url}><h4>{ this.props.post.title }</h4></a>
+          <p>{ this.props.post.description }</p>
+          <h5>Escrito por: <img src={this.props.post.writer_avatar_url} alt="user" /></h5>
+        </div>
+      </div>
+    );
+  }
+}
+
+class ShowPost extends Component {
+  render(){
+    var showPost = [];
+    this.props.posts.forEach(function(post, index){
+      showPost.push(<Post post={post} key={index}/>)
+    });
+    return (
+      <div className="row">
+        {showPost}
+      </div>
+    )
+
 
   }
+}
+
+class App extends Component {
+
   render() {
     return (
       <div className="App container">
@@ -22,23 +55,7 @@ class App extends Component {
               </ButtonGroup>
             </div>
           </div>
-          {posts.map((post,index) =>
-            <div className="row">
-            <div className="post">
-            <img src={post.post_image_url } />
-            <div className="votes">
-            <a><i className="material-icons">arrow_drop_up</i></a>
-            <p>{post.votes}</p>
-            <a href="#"><i className="material-icons">arrow_drop_down</i></a>
-            </div>
-            <div className="content">
-            <a href={post.url}><h4>{ post.title }</h4></a>
-            <p>{ post.description }</p>
-            <h5>Escrito por: <img src={post.writer_avatar_url} /></h5>
-            </div>
-            </div>
-            </div>
-          )};
+          <ShowPost posts={posts} />
         </div>
       </div>
     );
