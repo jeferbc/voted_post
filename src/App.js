@@ -34,26 +34,31 @@ class ShowPost extends Component {
         {showPost}
       </div>
     )
+  }
+}
 
-
+class SortButton extends Component{
+  render(){
+    return(
+      <div className="buttons">
+        <h3>Orden: </h3>
+        <ButtonGroup>
+        <Button>Ascendente</Button>
+        <Button>Descendente</Button>
+        </ButtonGroup>
+      </div>
+    )
   }
 }
 
 class App extends Component {
-
   render() {
     return (
       <div className="App container">
         <div className="col-md-10 col-md-offset-1">
           <h1>Blog posts populares</h1>
           <div className="row">
-            <div className="buttons">
-              <h3>Orden: </h3>
-              <ButtonGroup>
-              <Button>Ascendente</Button>
-              <Button>Descendente</Button>
-              </ButtonGroup>
-            </div>
+            <SortButton />
           </div>
           <ShowPost posts={posts} />
         </div>
