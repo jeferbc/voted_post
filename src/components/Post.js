@@ -34,7 +34,7 @@ class Post extends Component {
     return(
       <div style={styles.post}>
         <img style={styles.image} src={this.props.post.post_image_url } alt="post" />
-        <Votes votes={this.props.post.votes}/>
+        <Votes post={this.props.post}/>
         <div style={styles.content}>
           <a href={this.props.post.url}><h4>{ this.props.post.title }</h4></a>
           <p>{ this.props.post.description }</p>
