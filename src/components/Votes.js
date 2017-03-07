@@ -30,6 +30,11 @@ class Votes extends Component{
       type: "VOTE_UP",
       post
     });
+    if (store.getState().ascendent === true || store.getState().descendent == true){
+      store.dispatch({
+        type: store.getState().ascendent === true ? 'ASCENDENTENT_PRESSED' : 'DESCENDENTENT_PRESSED'
+      });
+    }
   }
 
 voteDown(post){
@@ -37,6 +42,11 @@ voteDown(post){
     type: "VOTE_DOWN",
     post
   });
+  if (store.getState().ascendent === true || store.getState().descendent == true){
+    store.dispatch({
+      type: store.getState().ascendent === true ? 'ASCENDENTENT_PRESSED' : 'DESCENDENTENT_PRESSED'
+    });
+  }
 }
 
   render(){

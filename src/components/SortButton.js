@@ -31,9 +31,9 @@ class SortButton extends Component{
         type: 'ASCENDENTENT_PRESSED'
       });
     }else
-    store.dispatch({
-      type: 'DESCENDENTENT_PRESSED'
-    });
+      store.dispatch({
+        type: 'DESCENDENTENT_PRESSED'
+      });
     }
 
   render(){
