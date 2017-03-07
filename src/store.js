@@ -26,25 +26,29 @@ const reducer = (state, action) => {
       ...state,
       posts: posts
     }
-  }else if(action.type === 'SORT_ASCENDENT'){
-    let posts = state.posts;
-    posts.sort(function (a, b) {
+  }else if (action.type === 'ASCENDENTENT_PRESSED') {
+    let posts_asc = state.posts;
+    posts_asc.sort(function (a, b) {
       return a.votes - b.votes;
     });
     return{
       ...state,
-      posts: posts
+      ascendent: true,
+      descendent: false,
+      posts: posts_asc
     }
-  }else if(action.type === 'SORT_DESCENDENT'){
-    let posts = state.posts;
-    posts.sort(function (a, b) {
+  }else if (action.type === 'DESCENDENTENT_PRESSED') {
+    let posts_des = state.posts;
+    posts_des.sort(function (a, b) {
       return b.votes - a.votes;
     });
     return{
       ...state,
-      posts: posts
+      ascendent: false,
+      descendent: true,
+      posts: posts_des
     }
   }
   return state;
 }
-export default createStore(reducer, { posts: posts });
+export default createStore(reducer, {posts: posts, ascendent: false, descendent: false});

@@ -13,32 +13,36 @@ const styles = {
 class SortButton extends Component{
   constructor(){
     super();
-    this.sortAscendent = this.sortAscendent.bind(this);
-    this.sortDescendent = this.sortDescendent.bind(this);
+    this.sortAscendent = this.updateSort.bind(this);
     this.state = {
       ascendent: false,
       descendent: false
     }
+    store.subscribe(() => {
+      this.setState({
+        ascendent: store.getState().ascendent,
+        descendent: store.getState().descendent
+      })
+    })
   }
-  sortAscendent(event){
-    event.preventDefault();
+  updateSort(type){
+    if (type === 'asc') {
+      store.dispatch({
+        type: 'ASCENDENTENT_PRESSED'
+      });
+    }else
     store.dispatch({
-      type: "SORT_ASCENDENT",
+      type: 'DESCENDENTENT_PRESSED'
     });
-  }
-  sortDescendent(event){
-    event.preventDefault();
-    store.dispatch({
-      type: "SORT_DESCENDENT",
-    });
-  }
+    }
+
   render(){
     return(
       <div style={styles.buttons}>
         <h3>Orden: </h3>
         <ButtonGroup>
-        <Button onClick={()=>this.sortAscendent(event)}>Ascendente</Button>
-        <Button onClick={()=>this.sortDescendent(event)}>Descendente</Button>
+        <Button onClick={()=>this.updateSort('asc')}>Ascendente</Button>
+        <Button onClick={()=>this.updateSort('des')}>Descendente</Button>
         </ButtonGroup>
       </div>
     )

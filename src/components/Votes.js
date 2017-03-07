@@ -25,16 +25,14 @@ class Votes extends Component{
     this.voteUp = this.voteUp.bind(this);
     this.voteDown = this.voteDown.bind(this);
   }
-  voteUp(post,event){
-    event.preventDefault();
+  voteUp(post){
     store.dispatch({
       type: "VOTE_UP",
       post
     });
   }
 
-voteDown(post,event){
-  event.preventDefault();
+voteDown(post){
   store.dispatch({
     type: "VOTE_DOWN",
     post
@@ -44,9 +42,9 @@ voteDown(post,event){
   render(){
     return(
       <div style={styles.votes}>
-        <div onClick={() => this.voteUp(this.props.post,event)}><i className="material-icons" style={styles.arrow}>arrow_drop_up</i></div>
+        <div onClick={() => this.voteUp(this.props.post)}><i className="material-icons" style={styles.arrow}>arrow_drop_up</i></div>
         <p style={styles.votesNumber}>{this.props.post.votes}</p>
-        <div onClick={() => this.voteDown(this.props.post,event)}><i className="material-icons" style={styles.arrow}>arrow_drop_down</i></div>
+        <div onClick={() => this.voteDown(this.props.post)}><i className="material-icons" style={styles.arrow}>arrow_drop_down</i></div>
       </div>
     );
   }

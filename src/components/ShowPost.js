@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Row} from 'react-bootstrap';
-import posts from '../posts';
 import Post from './Post';
 import store from '../store';
 
@@ -8,14 +7,21 @@ class ShowPost extends Component {
   constructor(){
     super();
     this.state = {
-      posts: posts
-    }
+      posts: []
+     }
     store.subscribe(() => {
       this.setState({
-        post: store.getState().posts
-      })
+        posts: store.getState().posts
+      });
     });
-  }
+
+}
+componentWillMount() {
+  store.dispatch({
+    type: "INITIAL_SORT"
+  });
+}
+
   render(){
     var showPost = [];
     this.state.posts.map((post, index)=>
