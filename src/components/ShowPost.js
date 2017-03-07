@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Row} from 'react-bootstrap';
 import Post from './Post';
 import store from '../store';
+import {componentWillMount} from '../actionCreators.js'
 
 class ShowPost extends Component {
   constructor(){
@@ -17,9 +18,7 @@ class ShowPost extends Component {
 
 }
 componentWillMount() {
-  store.dispatch({
-    type: "INITIAL_SORT"
-  });
+  store.dispatch(componentWillMount());
 }
 
   render(){

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import store from '../store'
+import {voteUp, voteDown, updateSortUp, updateSortDown} from '../actionCreators.js'
 
 const styles = {
   votes:{
@@ -26,26 +27,16 @@ class Votes extends Component{
     this.voteDown = this.voteDown.bind(this);
   }
   voteUp(post){
-    store.dispatch({
-      type: "VOTE_UP",
-      post
-    });
-    if (store.getState().ascendent === true || store.getState().descendent == true){
-      store.dispatch({
-        type: store.getState().ascendent === true ? 'ASCENDENTENT_PRESSED' : 'DESCENDENTENT_PRESSED'
-      });
+    store.dispatch(voteUp(post));
+    if (store.getState().ascendent === true || store.getState().descendent === true){
+      store.getState().ascendent === true ? store.dispatch(updateSortUp()) : store.dispatch(updateSortDown());
     }
   }
 
 voteDown(post){
-  store.dispatch({
-    type: "VOTE_DOWN",
-    post
-  });
-  if (store.getState().ascendent === true || store.getState().descendent == true){
-    store.dispatch({
-      type: store.getState().ascendent === true ? 'ASCENDENTENT_PRESSED' : 'DESCENDENTENT_PRESSED'
-    });
+  store.dispatch(voteDown(post));
+  if (store.getState().ascendent === true || store.getState().descendent === true){
+    store.getState().ascendent === true ? store.dispatch(updateSortUp()) : store.dispatch(updateSortDown());
   }
 }
 

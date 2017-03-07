@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Button, ButtonGroup} from 'react-bootstrap';
 import store from '../store';
+import {updateSortUp, updateSortDown} from '../actionCreators.js'
+
 const styles = {
   buttons:{
     display: 'inline-flex',
@@ -27,13 +29,9 @@ class SortButton extends Component{
   }
   updateSort(type){
     if (type === 'asc') {
-      store.dispatch({
-        type: 'ASCENDENTENT_PRESSED'
-      });
+      store.dispatch(updateSortUp());
     }else
-      store.dispatch({
-        type: 'DESCENDENTENT_PRESSED'
-      });
+      store.dispatch(store.dispatch(updateSortDown()));
     }
 
   render(){
