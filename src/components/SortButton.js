@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Button, ButtonGroup} from 'react-bootstrap';
-import store from '../store';
 import {updateSortUp, updateSortDown} from '../actionCreators.js'
+import {connect} from 'react-redux';
 
 const styles = {
   buttons:{
@@ -12,39 +12,34 @@ const styles = {
   }
 }
 
-class SortButton extends Component{
-  constructor(){
-    super();
-    this.sortAscendent = this.updateSort.bind(this);
-    this.state = {
-      ascendent: false,
-      descendent: false
-    }
-    store.subscribe(() => {
-      this.setState({
-        ascendent: store.getState().ascendent,
-        descendent: store.getState().descendent
-      })
-    })
-  }
-  updateSort(type){
-    if (type === 'asc') {
-      store.dispatch(updateSortUp());
-    }else
-      store.dispatch(store.dispatch(updateSortDown()));
-    }
+const SortButton = (props) => {
+  return(
+    <div style={styles.buttons}>
+      <h3>Orden: </h3>
+      <ButtonGroup>
+      <Button onClick={()=>props.updateSort('asc')}>Ascendente</Button>
+      <Button onClick={()=>props.updateSort('des')}>Descendente</Button>
+      </ButtonGroup>
+    </div>
+  );
+}
 
-  render(){
-    return(
-      <div style={styles.buttons}>
-        <h3>Orden: </h3>
-        <ButtonGroup>
-        <Button onClick={()=>this.updateSort('asc')}>Ascendente</Button>
-        <Button onClick={()=>this.updateSort('des')}>Descendente</Button>
-        </ButtonGroup>
-      </div>
-    )
+const mapStateToProps = state => {
+  return{
+    ascendent: state.ascendent,
+    descendent: state.descendent
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return{
+    updateSort(type){
+      if (type === 'asc')
+        dispatch(updateSortUp());
+      else
+        dispatch(updateSortDown());
+    }
   }
 }
 
-export default SortButton;
+export default connect(mapStateToProps, mapDispatchToProps)(SortButton);
